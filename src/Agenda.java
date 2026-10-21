@@ -73,9 +73,20 @@ public class Agenda {
 	 * @param dia o dia para o qual se deseja obter a agenda
 	 * @return uma {@code String} com as consultas do dia 
 	 */
+
+	private String resultado;
+	private LocalDate diaAtual;
+
 	public String agendaDoDia(LocalDate dia) {
-		//TODO
-		return "";
+		resultado = "";	
+		diaAtual = LocalDate.now();
+		for (Consulta consulta : agenda) {
+			if (diaAtual == dia) {
+				resultado += consulta.toString();
+			}
+
+		}
+		return resultado;
 	}
 
 }

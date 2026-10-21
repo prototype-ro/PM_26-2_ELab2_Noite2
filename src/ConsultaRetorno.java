@@ -53,7 +53,7 @@ public class ConsultaRetorno extends Consulta {
 		/** determinar data e horario da consulta retorno */
 		consultaAnterior = original;
 		LocalDate data = LocalDate.from(hora);
-		LocalDate dataOriginal = LocalDate.from(consultaAnterior.horario);
+		LocalDate dataOriginal = LocalDate.from(original.horario);
 		long dias = dataOriginal.until(data, ChronoUnit.DAYS);
 
 		if(dias < INTERVALO_MAXIMO)
@@ -61,7 +61,7 @@ public class ConsultaRetorno extends Consulta {
 		 	valorDesconto = original.especialidade.valor(); 
 		/** conferir a diferenca em dias entre a consulta original e retorno */
 
-		super(null, null, null);
+		super(original.nomePaciente, original.horario, original.especialidade);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class ConsultaRetorno extends Consulta {
 	 * @return valor da consulta de retorno (atualmente, {@code 0})
 	 */
 	public double valorConsulta() {
-		return especialidade.valor() - valorDesconto;	
+		return consultaAnterior.especialidade.valor() - valorDesconto;	
 	}
 
 }
