@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 /** 
  * MIT License
@@ -39,6 +41,8 @@ public class ConsultaRetorno extends Consulta {
 	/** Consulta original à qual este retorno está associado. */
 	private Consulta consultaAnterior;
 
+	/** Criar variavel double de desconto */
+	private double valorDesconto;
 	/**
 	 * Cria uma consulta de retorno.
 	 * 
@@ -46,7 +50,17 @@ public class ConsultaRetorno extends Consulta {
 	 * @param original consulta original da qual este é o retorno
 	 */
 	public ConsultaRetorno(LocalDateTime hora, Consulta original) {
-		//TODO
+		/** determinar data e horario da consulta retorno */
+		consultaAnterior = original;
+		LocalDate data = LocalDate.from(hora);
+		LocalDate dataOriginal = LocalDate.from(consultaAnterior.horario);
+		long dias = dataOriginal.until(data, ChronoUnit.DAYS);
+
+		if(dias < INTERVALO_MAXIMO)
+			/** dizer que o retorno vai ter o desconto */;
+		 	valorDesconto = original.especialidade.valor(); 
+		/** conferir a diferenca em dias entre a consulta original e retorno */
+
 		super(null, null, null);
 	}
 
@@ -55,8 +69,7 @@ public class ConsultaRetorno extends Consulta {
 	 * @return valor da consulta de retorno (atualmente, {@code 0})
 	 */
 	public double valorConsulta() {
-		//TODO
-		return 0;
+		return especialidade.valor() - valorDesconto;	
 	}
 
 }

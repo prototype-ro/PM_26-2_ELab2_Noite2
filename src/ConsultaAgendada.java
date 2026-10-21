@@ -68,6 +68,8 @@ public class ConsultaAgendada extends Consulta {
 		super(paciente, hora, espec);
 		
 		//TODO: calcular desconto, se for o caso.
+		if (dias < ANTECEDENCIA_DESCONTO);
+
 
 	}
 
